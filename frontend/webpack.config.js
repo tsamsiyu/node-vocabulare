@@ -15,13 +15,10 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: [
-              // 'react-html-attrs',
-              // 'transform-class-properties',
-              // 'transform-decorators-legacy',
               'transform-runtime'
           ]
         }
-      }
+      },
     ]
   },
   output: {
@@ -29,13 +26,11 @@ module.exports = {
     filename: "entry.min.js"
   },
   plugins: [
-    // new webpack.optimize.DedupePlugin(),
-    // new webpack.optimize.OccurenceOrderPlugin(),
-    // new webpack.EnvironmentPlugin('NODE_ENV'),
     new webpack.DefinePlugin({
         NODE_ENV:   JSON.stringify(process.env.NODE_ENV || 'development'),
         DEBUG:      debug
-    })
+    }),
+    new webpack.NoErrorsPlugin(),
   ]
 };
 
