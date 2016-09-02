@@ -7,7 +7,6 @@ function getLogger(module) {
 	var consoleTransport = new winston.transports.Console({
 		colorize: true,
 		level: (ENV == 'development') ? 'debug' : 'error',
-		level: 'debug',
 		label: path
 	});
 
