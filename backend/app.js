@@ -12,13 +12,13 @@ http.createServer(app).listen(config.get("port"), function () {
   log.info('Server started');
 });
 
-// middlewares
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(errorHandler());
-
-// routes
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', guestRoutes);
+app.all(/.+/, function (req, res, next) {
+  next(404);
+});
+app.use(errorHandler);
 
 module.exports = app;

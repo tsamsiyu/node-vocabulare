@@ -17,7 +17,7 @@ BaseError.prototype.setMessage = function (message) {
     }
 };
 
-NotFoundHttpError.prototype.name = 'BaseError';
+BaseError.prototype.name = 'BaseError';
 util.inherits(BaseError, Error);
 
 // *** HttpError ***
@@ -40,7 +40,7 @@ HttpError.setMessage = function (message, status) {
     }
 };
 
-NotFoundHttpError.prototype.name = 'HttpError';
+HttpError.prototype.name = 'HttpError';
 util.inherits(HttpError, BaseError);
 
 // *** NotFoundHttpError ***
@@ -60,7 +60,7 @@ function InvalidRequestHttpError() {
     Error.captureStackTrace(this, InvalidRequestHttpError);
 }
 
-NotFoundHttpError.prototype.name = 'InvalidRequestHttpError';
+InvalidRequestHttpError.prototype.name = 'InvalidRequestHttpError';
 util.inherits(InvalidRequestHttpError, HttpError);
 
 module.exports = {
