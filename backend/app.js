@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', guestRoutes);
-app.all(/.+/, function (req, res, next) {
+app.use('*', function(req, res, next) {
   next(404);
 });
 app.use(errorHandler);

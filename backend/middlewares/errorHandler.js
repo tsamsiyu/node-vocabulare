@@ -11,6 +11,6 @@ module.exports = function (err, req, res, next) {
         err = new HttpError(500);
     }
 
-    res.status = err.status;
+    res.status(err.status);
     res.end(JSON.stringify({error: err.message}));
 };
