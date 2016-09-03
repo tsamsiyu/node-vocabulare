@@ -42,7 +42,7 @@ export default class RegisterForm extends React.Component {
                                     selected={this.state.birthday}
                                     onChange={this.onBirthdayChange.bind(this)}/>
                     </FormInput>
-                    <FormInput name="password" label="Password repeat" />
+                    <FormInput name="password" label="Password" />
                     <FormInput name="password_repeat" label="Password repeat" />
                     <button type="submit" className="btn btn-default">Sign up</button>
                 </Form>

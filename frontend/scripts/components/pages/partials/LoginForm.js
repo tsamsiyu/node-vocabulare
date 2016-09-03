@@ -13,7 +13,7 @@ export default class LoginForm extends React.Component {
         return (
             <div id="login_form-component">
                 <Form action="/signin" id="login_form">
-                    <FormInput name="login" label="Password"/>
+                    <FormInput name="login" label="Login"/>
                     <FormInput name="password" text="password" label="Password"/>
                     <button type="submit" className="btn btn-default">Sign in</button>
                 </Form>

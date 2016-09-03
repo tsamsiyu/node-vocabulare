@@ -1,14 +1,6 @@
 import React from "react";
 
 export default class FormInput extends React.Component {
-    componentDidMount() {
-        this.state = {
-            name: this.props.name,
-            type: this.props.type || 'text',
-            formId: this.props.formId
-        };
-    }
-
     static contextTypes = {
         formId: React.PropTypes.string
     }
