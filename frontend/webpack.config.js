@@ -2,6 +2,8 @@ var debug   = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path    = require('path');
 
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
   context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
@@ -15,10 +17,15 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: [
-              'transform-runtime'
+              'transform-runtime',
+              'transform-decorators-legacy'
           ]
         }
       },
+      {
+        test: /\.css$/,
+        loader: 'style!css!autoprefixer?browsers=last 2 versions'
+      }
     ]
   },
   output: {
