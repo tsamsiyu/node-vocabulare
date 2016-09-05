@@ -22,7 +22,7 @@ export default class Form extends React.Component {
         let className = this.props.className || 'form-horizontal';
 
         return (
-                <form action={action} className={className} noValidate id={this.props.id}>
+                <form action={action} className={className} noValidate id={this.props.id} onSubmit={this.props.onSubmit}>
                     {this.props.children}
                 </form>
             );

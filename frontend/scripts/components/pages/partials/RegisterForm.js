@@ -1,10 +1,9 @@
 import React from "react";
 import FormInput from './FormInput';
-import Form from './Form';
+import AjaxForm from './AjaxForm';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
 
 
 @connect((store) => {
@@ -17,11 +16,11 @@ export default class RegisterForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            birthday: moment()
+            birthday: null
         };
     }
 
-    onBirthdayChange(date) {
+    handleBirthdayChange(date) {
         this.setState({
             birthday: date
         });
@@ -30,22 +29,21 @@ export default class RegisterForm extends React.Component {
     render() {
         return (
             <div id="register_form-component">
-                <Form action="/signup" id="register_form">
-                    <FormInput name="first_name" label="First name"/>
-                    <FormInput name="last_name" label="Last name"/>
-                    <FormInput name="email" label="Email" type="email"/>
-                    <FormInput name="login" label="Login"/>
-                    <FormInput name="birthday" label="Birthday">
+                <AjaxForm action="/signup" id="register_form">
+                    <FormInput name="Profile[first_name]" label="First name"/>
+                    <FormInput name="Profile[last_name]" label="Last name"/>
+                    <FormInput name="User[email]" label="Email" type="email"/>
+                    <FormInput name="User[login]" label="Login"/>
+                    <FormInput name="Profile[birthday]" label="Birthday">
                         <DatePicker className="form-control"
                                     id="birthday"
-                                    placeholderText="Birthday"
                                     selected={this.state.birthday}
-                                    onChange={this.onBirthdayChange.bind(this)}/>
+                                    onChange={this.handleBirthdayChange.bind(this)}/>
                     </FormInput>
-                    <FormInput name="password" label="Password" />
-                    <FormInput name="password_repeat" label="Password repeat" />
+                    <FormInput name="User[password]" label="Password" />
+                    <FormInput name="User[password_repeat]" label="Password repeat" />
                     <button type="submit" className="btn btn-default">Sign up</button>
-                </Form>
+                </AjaxForm>
             </div>
         );
     }
