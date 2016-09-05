@@ -1,11 +1,16 @@
 var crypto          = require('crypto');
 var mongoose        = require('libs/mongoose');
-var userValidators  = require('validators/user').validators;
+var userValidators  = require('../../validators/user').validators;
+var Profile         = require('./profile').Profile;
 
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
     login: {
+        type: String,
+        unique: true
+    },
+    email: {
         type: String,
         unique: true,
         required: true
@@ -39,6 +44,8 @@ schema.virtual('password')
     });
 
 var User = mongoose.model('User', schema);
+
+// User.hasOne('profile', Profile, '_id', 'user_id');
 
 User.prototype.signup = function (callback) {
     userValidators.signup(this).then(function (validatedUser) {

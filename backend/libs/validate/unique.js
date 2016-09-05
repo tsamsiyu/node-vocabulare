@@ -27,7 +27,7 @@ var uniqueValidator = function (value, options, field, hash) {
             if (mongoose.connection.readyState == connStates.connected) {
                 _mustUnique(resolve, collectionName, conditions);
             } else {
-                mongoose.connection.on('open', function () {
+                mongoose.connection.once('open', function () {
                     _mustUnique(resolve, collectionName, conditions);
                 });
             }
