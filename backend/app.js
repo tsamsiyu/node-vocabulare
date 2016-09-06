@@ -12,13 +12,20 @@ http.createServer(app).listen(config.get("port"), function () {
   log.info('Server started');
 });
 
+// MIDDLEWARE-s
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // res.setHeader('Content-Type', 'application/json');
+  next();
+});
+// ROUTES
 app.use('/', guestRoutes);
 app.use('*', function(req, res, next) {
   next(404);
 });
-app.use(errorHandler);
+app.use(errorHandler); // TODO: need to test
 
 module.exports = app;

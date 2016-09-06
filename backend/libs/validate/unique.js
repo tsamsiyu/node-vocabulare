@@ -7,10 +7,10 @@ var uniqueValidator = function (value, options, field, hash) {
 
     if (isOptionsObject && options.collection) {
         collectionName = options.collection;
-    } else if (options instanceof String) {
+    } else if (typeof options === 'string') {
         collectionName = options;
     } else {
-        collectionName = hash.meta.collectionName;
+        collectionName = hash.constructor.collectionName;
     }
 
     if (isOptionsObject && options.field) {

@@ -33,6 +33,8 @@ schema.methods.encryptPassword = function (password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
+schema.virtual('passwordRepeat');
+
 schema.virtual('password')
     .set(function (password) {
         this._plainPassword = password;
@@ -45,18 +47,23 @@ schema.virtual('password')
 
 var User = mongoose.model('User', schema);
 
-// User.hasOne('profile', Profile, '_id', 'user_id');
+User.signup = function(attributes, cb) {
+    userValidators.signup(attributes).then(function(validatedUser) {
+        var user = new User;
+        user.fill(attributes, ['login', 'email', 'password']);
 
-User.prototype.signup = function (callback) {
-    userValidators.signup(this).then(function (validatedUser) {
-        validatedUser.save(function (err, savedUser, affected) {
-            callback({status: 1});
+        var profile = new Profile;
+        profile.fill(attributes, ['first_name', 'last_name', 'birthday']);
+
+        user.save(function(uErr, uModel, uAffected) {
+            if (uErr) throw uErr;
+            profile.set('userId', user.get('_id')).save(function (pErr, pModel, pAffected) {
+                if (pErr) throw pErr;
+                cb({ status: 1 });
+            });
         });
-    }, function (errors) {
-        callback({
-            status: 0,
-            errors: errors
-        });
+    }, function(errors) {
+        cb({ status: 0, errors: errors });
     });
 };
 

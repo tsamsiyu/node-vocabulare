@@ -1,5 +1,5 @@
 export default {
-    apiUrl: 'localhost:3000',
+    apiUrl: 'http://127.0.0.1:3001',
     appName: 'Vocabulare',
     debug: true
 };

@@ -30,6 +30,9 @@ module.exports = function(model) {
             if (!relationObject instanceof rel.relationConstructor) {
                 throw new Error('Value must have constructor type');
             }
+            if (relationObject.isNew) {
+                throw new Error('Cannot link with unsaved property');
+            }
 
             if (rel.isRelationCarrier) {
                 this.set(rel.relationAttribute, relationObject.get('_id'));
@@ -89,5 +92,10 @@ module.exports = function(model) {
 
     model.prototype.hasRelation = function(name) {
         return _relationsDefinitions.hasOwnProperty(name);
+    };
+
+    var prevSave = model.save;
+    model.prototype.save = function (options, cb) {
+
     };
 };

@@ -3,9 +3,10 @@ var Schema          = mongoose.Schema;
 var User            = require('./index');
 
 var schema = new Schema({
-    first_name: String,
-    last_name: String,
-    birthday: Date
+    firstName: String,
+    lastName: String,
+    birthday: Date,
+    userId: Schema.Types.ObjectId,
 });
 
 var Profile = mongoose.model('Profile', schema);

@@ -30,18 +30,18 @@ export default class RegisterForm extends React.Component {
         return (
             <div id="register_form-component">
                 <AjaxForm action="/signup" id="register_form">
-                    <FormInput name="Profile[first_name]" label="First name"/>
-                    <FormInput name="Profile[last_name]" label="Last name"/>
+                    <FormInput name="User[firstName]" label="First name"/>
+                    <FormInput name="User[lastName]" label="Last name"/>
                     <FormInput name="User[email]" label="Email" type="email"/>
                     <FormInput name="User[login]" label="Login"/>
-                    <FormInput name="Profile[birthday]" label="Birthday">
+                    <FormInput name="User[birthday]" label="Birthday">
                         <DatePicker className="form-control"
                                     id="birthday"
                                     selected={this.state.birthday}
                                     onChange={this.handleBirthdayChange.bind(this)}/>
                     </FormInput>
                     <FormInput name="User[password]" label="Password" />
-                    <FormInput name="User[password_repeat]" label="Password repeat" />
+                    <FormInput name="User[passwordRepeat]" label="Password repeat" />
                     <button type="submit" className="btn btn-default">Sign up</button>
                 </AjaxForm>
             </div>

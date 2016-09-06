@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import getFormData from 'get-form-data';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 @connect((store) => {
     return {
@@ -11,8 +12,14 @@ import { connect } from 'react-redux';
 export default class AjaxForm extends React.Component {
     handleFormSubmitting(e) {
         e.preventDefault();
-        console.log(e);
-        console.log(getFormData(e.target));
+        let formData = getFormData(e.target);
+        $.ajax({ // TODO: use axios or other ajax library instead of jquery.ajax
+            method: e.target.method,
+            url: e.target.action,
+            data: formData
+        }).then(function (response) {
+            console.log(response);
+        });
     }
 
     render() {

@@ -6,11 +6,11 @@ module.exports.validators = {
             email: {
                 presence: true,
                 email: true,
-                unique: true
+                unique: 'users'
             },
             login: {
                 unique: true,
-                length: { minimum: 4 }
+                length: { minimum: 2 }
             },
             password: {
                 presence: true,
@@ -22,9 +22,9 @@ module.exports.validators = {
             last_name: {
                 length: { minimum: 2 }
             },
-            birthday: {
-                date: { earliest: true }
-            }
+            // birthday: { // TODO: read documentation, format and parser must be set
+            //     date: { earliest: true }
+            // }
         };
 
         return validate.async(user, userConstraints);
