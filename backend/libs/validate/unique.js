@@ -9,8 +9,10 @@ var uniqueValidator = function (value, options, field, hash) {
         collectionName = options.collection;
     } else if (typeof options === 'string') {
         collectionName = options;
+    } else if (hash.constructor.collection) {
+        collectionName = hash.constructor.collection.collectionName;
     } else {
-        collectionName = hash.constructor.collectionName;
+        throw new Error('Collection name must be specified for unique validator');
     }
 
     if (isOptionsObject && options.field) {
@@ -20,7 +22,8 @@ var uniqueValidator = function (value, options, field, hash) {
     }
 
     return new Promise(function (resolve, reject) {
-        var conditions = [];
+        if (!value) resolve();
+        var conditions = {};
         conditions[collectionField] = value;
 
         try {
@@ -39,13 +42,18 @@ var uniqueValidator = function (value, options, field, hash) {
 
 var _mustUnique = function (resolve, collectionName, conditions) {
     var db = mongoose.connection.db;
-    var collection = db.collection(collectionName);
-    collection.count(conditions, function (err, cnt) {
-        if (cnt > 0) {
-            resolve('already exists');
-        } else {
-            resolve();
-        }
+    db.collection(collectionName, function (err, collection) {
+        collection.count(conditions, function (err, cnt) {
+            if (err) {
+                resolve('cannot be checked, sorry');
+            } else {
+                if (cnt) {
+                    resolve('already exists');
+                } else {
+                    resolve();
+                }
+            }
+        });
     });
 };
 

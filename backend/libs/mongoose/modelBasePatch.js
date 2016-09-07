@@ -11,9 +11,10 @@ module.exports = function (model) {
     };
 
     model.prototype.fill = function(container, safeAttributes) {
+        var self = this;
         safeAttributes.forEach(function(attr) {
             if (container[attr]) {
-                this.set(attr, container[attr]);
+                self.set(attr, container[attr]);
             }
         });
     };

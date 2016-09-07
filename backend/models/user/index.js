@@ -7,8 +7,7 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
     login: {
-        type: String,
-        unique: true
+        type: String
     },
     email: {
         type: String,
@@ -33,8 +32,6 @@ schema.methods.encryptPassword = function (password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
-schema.virtual('passwordRepeat');
-
 schema.virtual('password')
     .set(function (password) {
         this._plainPassword = password;
@@ -53,7 +50,7 @@ User.signup = function(attributes, cb) {
         user.fill(attributes, ['login', 'email', 'password']);
 
         var profile = new Profile;
-        profile.fill(attributes, ['first_name', 'last_name', 'birthday']);
+        profile.fill(attributes, ['firstName', 'lastName', 'birthday']);
 
         user.save(function(uErr, uModel, uAffected) {
             if (uErr) throw uErr;

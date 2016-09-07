@@ -23,9 +23,9 @@ app.use(function (req, res, next) {
 });
 // ROUTES
 app.use('/', guestRoutes);
-app.use('*', function(req, res, next) {
-  next(404);
-});
-app.use(errorHandler); // TODO: need to test
+// app.use('*', function(req, res, next) {
+//   next(404);
+// });
+// app.use(errorHandler); // TODO: need to test
 
 module.exports = app;

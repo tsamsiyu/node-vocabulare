@@ -12,7 +12,7 @@ mongoose.model = function(name, schema, collection, skipInit) {
     var m = prevModelFunction.call(mongoose, name, schema, collection, skipInit);
 
     modelBasePatch(m);
-    modelRelationsPatch(m);
+    // modelRelationsPatch(m);
 
     return m;
 };
