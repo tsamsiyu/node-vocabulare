@@ -1,7 +1,8 @@
 var crypto          = require('crypto');
-var mongoose        = require('libs/mongoose');
+var mongoose        = require('../../libs/mongoose');
 var userValidators  = require('../../validators/user').validators;
 var Profile         = require('./profile').Profile;
+var validate        = require('../../libs/validate');
 
 var Schema = mongoose.Schema;
 
@@ -44,6 +45,8 @@ schema.virtual('password')
 
 var User = mongoose.model('User', schema);
 
+User.hasOne('Profile');
+
 User.signup = function(attributes, cb) {
     userValidators.signup(attributes).then(function(validatedUser) {
         var user = new User;
@@ -61,6 +64,27 @@ User.signup = function(attributes, cb) {
         });
     }, function(errors) {
         cb({ status: 0, errors: errors });
+    });
+};
+
+User.signin = function(attributes, cb) {
+    userValidators.signin(attributes).then(function(validatedUser) {
+        var query = {};
+        if (!validate.single(attributes.loginOrEmail, {email: true})) {
+            query.email = attributes.loginOrEmail;
+        } else {
+            query.login = attributes.loginOrEmail;
+        }
+
+        User.findOne(query, function (err, doc) {
+            if (doc && doc.encryptPassword(attributes.password) === doc.hashedPassword) {
+                cb(doc);
+            } else {
+                cb();
+            }
+        });
+    }, function(errors) {
+        cb();
     });
 };
 

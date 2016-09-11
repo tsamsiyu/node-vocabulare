@@ -40,8 +40,8 @@ export default class RegisterForm extends React.Component {
                                     selected={this.state.birthday}
                                     onChange={this.handleBirthdayChange.bind(this)}/>
                     </FormInput>
-                    <FormInput name="User[password]" label="Password" />
-                    <FormInput name="User[passwordRepeat]" label="Password repeat" />
+                    <FormInput name="User[password]" label="Password" type="password" />
+                    <FormInput name="User[passwordRepeat]" label="Password repeat" type="password" />
                     <button type="submit" className="btn btn-default">Sign up</button>
                 </AjaxForm>
             </div>

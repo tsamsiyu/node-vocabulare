@@ -1,6 +1,6 @@
 import React from "react";
 import FormInput from './FormInput';
-import Form from './Form';
+import AjaxForm from './AjaxForm';
 import { connect } from 'react-redux';
 
 @connect((store) => {
@@ -12,11 +12,11 @@ export default class LoginForm extends React.Component {
     render() {
         return (
             <div id="login_form-component">
-                <Form action="/signin" id="login_form">
-                    <FormInput name="login" label="Login"/>
-                    <FormInput name="password" text="password" label="Password"/>
+                <AjaxForm action="/signin" id="login_form">
+                    <FormInput name="User[loginOrEmail]" label="Login"/>
+                    <FormInput name="User[password]" type="password" label="Password"/>
                     <button type="submit" className="btn btn-default">Sign in</button>
-                </Form>
+                </AjaxForm>
             </div>
         );
     }

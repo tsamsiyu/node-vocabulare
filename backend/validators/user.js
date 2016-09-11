@@ -1,7 +1,7 @@
 var validate = require('../libs/validate');
 
 module.exports.validators = {
-    signup: function (user) {
+    signup: function(user) {
         var userConstraints = {
             email: {
                 presence: true,
@@ -20,10 +20,10 @@ module.exports.validators = {
                 presence: true,
                 equality: 'password'
             },
-            first_name: {
+            firstName: {
                 length: { minimum: 2 }
             },
-            last_name: {
+            lastName: {
                 length: { minimum: 2 }
             },
             birthday: {
@@ -32,5 +32,18 @@ module.exports.validators = {
         };
 
         return validate.async(user, userConstraints);
+    },
+    signin: function(user) {
+        var constraints = {
+            loginOrEmail: {
+                presence: true
+            },
+            password: {
+                presence: true,
+                length: { minimum: 6 }
+            }
+        };
+
+        return validate.async(user, constraints);
     }
 };

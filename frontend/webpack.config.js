@@ -8,6 +8,9 @@ module.exports = {
   context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
   entry: "./scripts/entry.js",
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       {

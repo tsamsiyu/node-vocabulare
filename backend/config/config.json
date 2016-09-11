@@ -3,6 +3,15 @@
 	"db": {
 		"uri": "mongodb://127.0.0.1:27017/vocabulare"
 	},
+	"session": {
+		"secret": "My Jonney",
+		"key": "sid",
+		"cookie": {
+			"path": "/",
+			"httpOnly": true,
+			"maxAge": null
+		}
+	},
 	"libs": {
 		"mongoose": {
 			"server": {

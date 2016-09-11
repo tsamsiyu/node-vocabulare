@@ -11,9 +11,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route component={MainLayout}>
-                {/*<Redirect from="/" to="/signin" />*/}
-                {/*<Route path="/signin" component={LoginPage} />*/}
-                <Route path="/" component={RegisterPage} />
+                <Redirect from="/" to="/signin" />
+                <Route path="/signin" component={LoginPage} />
+                <Route path="/signup" component={RegisterPage} />
             </Route>
         </Router>
     </Provider>,
