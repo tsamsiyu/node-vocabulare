@@ -4,7 +4,7 @@ var router  = express.Router();
 router.get('/initialize', function (req, res, next) {
     var settings = {};
 
-    settings.isGuest = !!req.user;
+    settings.isGuest = !req.user;
     if (req.user) {
         settings.user = {
             firstName: req.user.profile.firstName,

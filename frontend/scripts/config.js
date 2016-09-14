@@ -1,5 +1,0 @@
-export default {
-    apiUrl: 'http://127.0.0.1:3001',
-    appName: 'Vocabulare',
-    debug: true
-};

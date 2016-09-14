@@ -1,28 +1,20 @@
 import { applyMiddleware, createStore } from "redux"
 import settings from './reducers/settings'
-import logger from "redux-logger"
+// import logger from "redux-logger"
 import thunk from "redux-thunk"
-import promise from "redux-promise-middleware"
+// import promise from "redux-promise-middleware"
 import Immutable from 'immutable'
+import ReduxAsyncData from '../libs/ReduxAsyncData';
 import { combineReducers } from 'redux-immutable'
 
 const reducers = {
     settings
 };
 const reducer = combineReducers(reducers);
-const middleware = applyMiddleware(promise(), thunk, logger());
+/*promise(), *//*, logger()*/
+const middleware = applyMiddleware(thunk);
 const state = Immutable.Map({
-    settings: {}
+    settings: new ReduxAsyncData({state: {}, env: {}})
 });
 
-const store = createStore(reducer, state, middleware);
-
-for (let i in reducers) {
-    Object.defineProperty(store, i, {
-        get: function () {
-            return this.getState().get(i);
-        }
-    })
-}
-
-export default store;
+export default createStore(reducer, state, middleware);

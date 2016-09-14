@@ -35,6 +35,7 @@ app.use(function (req, res, next) {
 });
 // ROUTES
 app.use('/', require('./routes/guest'));
+app.use('/', require('./routes/common'));
 
 // app.use(function (req, res, next) {
 //   // if (!res.user) {

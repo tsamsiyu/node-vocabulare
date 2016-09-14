@@ -1,6 +1,7 @@
+import config from './config';
+import { loadSettings } from './store/actions/settings';
 import store from './store';
-import { loadSettings } from './store/actions';
 
-store.dispatch(loadSettings());
+store.dispatch(loadSettings(config));
 
-export { store };
+export { store, config };

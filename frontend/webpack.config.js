@@ -28,6 +28,11 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style!css!autoprefixer?browsers=last 2 versions'
+      },
+      {
+        test: /\.json/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'json-loader'
       }
     ]
   },
