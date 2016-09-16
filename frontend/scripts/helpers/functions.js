@@ -12,12 +12,14 @@ export function tryKey(hash, chain, missedValue = undefined) {
             } else {
                 hash = hash.get(item);
             }
-        } else {
+        } else if (typeof hash === 'object') {
             if (!hash.hasOwnProperty(item)) {
                 return missedValue;
             } else {
                 hash = hash[item];
             }
+        } else {
+            return missedValue;
         }
     }
 

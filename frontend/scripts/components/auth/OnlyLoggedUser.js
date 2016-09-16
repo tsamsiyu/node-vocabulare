@@ -6,6 +6,6 @@ export default UserAuthWrapper({
     redirectAction: routerActions.redirect,
     wrapperDisplayName: 'OnlyLoggedUser',
     failureRedirectPath: '/signin',
-    predicate: settings => !settings.tryData('data.state.isGuest', true),
+    predicate: settings => !settings.isGuest,
     allowRedirectBack: false
 });
