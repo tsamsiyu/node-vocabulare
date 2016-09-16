@@ -1,19 +1,21 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 export function loadSettings(config) {
     return (dispatch) => {
         dispatch({
             type: 'SETTINGS_LOADING'
         });
-        axios({
+        $.ajax({
             method: 'GET',
             url: config.apiUrl + '/initialize',
-            dataType: 'json'
+            dataType: 'json',
+            crossDomain: true,
+            xhrFields: { withCredentials: true }
         }).then(function (response) {
             dispatch({
                 type: 'SETTINGS_LOADED',
                 payload: {
-                    state: response.data,
+                    state: response,
                     env: config
                 }
             });

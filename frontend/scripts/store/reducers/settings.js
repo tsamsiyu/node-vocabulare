@@ -1,5 +1,3 @@
-import FluxAsyncDataHelper from '../../libs/FluxAsyncDataHelper';
-
 export default function reducer(state, action) {
     if (action.type === 'SETTINGS_LOADING') {
         state = state.loading();

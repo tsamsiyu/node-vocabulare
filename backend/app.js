@@ -4,6 +4,7 @@ var log           = require('libs/log')(module);
 var http          = require('http');
 var path          = require('path');
 var bodyParser    = require('body-parser');
+var cookieParser  = require('cookie-parser');
 var errorHandler  = require('./middlewares/errorHandler');
 var session       = require('express-session');
 var mongoose      = require('./libs/mongoose');
@@ -16,8 +17,17 @@ http.createServer(app).listen(config.get("port"), function () {
 });
 
 // MIDDLEWARE-s
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, *");
+  // res.setHeader('Content-Type', 'application/json');
+  next();
+});
 app.use(session({
   secret: config.get('session:secret'),
   key: config.get('session:key'),
@@ -28,11 +38,6 @@ app.use(session({
 }));
 app.use(loadUser);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // res.setHeader('Content-Type', 'application/json');
-  next();
-});
 // ROUTES
 app.use('/', require('./routes/guest'));
 app.use('/', require('./routes/common'));

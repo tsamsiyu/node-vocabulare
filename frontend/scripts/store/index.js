@@ -4,7 +4,7 @@ import settings from './reducers/settings'
 import thunk from "redux-thunk"
 // import promise from "redux-promise-middleware"
 import Immutable from 'immutable'
-import FluxAsyncDataHelper from '../libs/FluxAsyncDataHelper';
+import FluxAsyncDataHelper from '../helpers/FluxAsyncDataHelper';
 import { combineReducers } from 'redux-immutable'
 
 const reducers = {

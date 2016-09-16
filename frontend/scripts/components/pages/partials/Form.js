@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 export default class Form extends React.Component {
     static childContextTypes = {
         formId: React.PropTypes.string
-    }
+    };
 
     getChildContext() {
         return {
@@ -18,7 +18,7 @@ export default class Form extends React.Component {
     }
 
     render() {
-        let action = this.props.settings.apiUrl + this.props.action;
+        let action = this.props.settings.tryData('data.env.apiUrl', '') + this.props.action;
         let className = this.props.className || 'form-horizontal';
         let method = this.props.method || 'POST';
 

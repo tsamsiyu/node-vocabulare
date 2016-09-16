@@ -4,19 +4,16 @@ import getFormData from 'get-form-data';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-@connect((store) => {
-    return {
-        settings: store.get('settings')
-    };
-})
 export default class AjaxForm extends React.Component {
     handleFormSubmitting(e) {
         e.preventDefault();
         let formData = getFormData(e.target);
-        $.ajax({ // TODO: use axios or other ajax library instead of jquery.ajax
+        $.ajax({ // TODO: use axios, fetch, or other ajax library instead of jquery.ajax
             method: e.target.method,
             url: e.target.action,
-            data: formData
+            data: formData,
+            crossDomain: true,
+            xhrFields: { withCredentials: true }
         }).then(function (response) {
             console.log(response);
         });

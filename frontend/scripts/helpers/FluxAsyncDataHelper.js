@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { tryKey } from '../helpers/common';
+import { tryKey } from './common';
 
 function loading() {
     let map = {...this.toJS(), loading: true, loaded: false};
