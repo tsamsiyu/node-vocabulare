@@ -4,7 +4,7 @@ import settings from './reducers/settings'
 import thunk from "redux-thunk"
 // import promise from "redux-promise-middleware"
 import Immutable from 'immutable'
-import ReduxAsyncData from '../libs/ReduxAsyncData';
+import FluxAsyncDataHelper from '../libs/FluxAsyncDataHelper';
 import { combineReducers } from 'redux-immutable'
 
 const reducers = {
@@ -14,7 +14,7 @@ const reducer = combineReducers(reducers);
 /*promise(), *//*, logger()*/
 const middleware = applyMiddleware(thunk);
 const state = Immutable.Map({
-    settings: new ReduxAsyncData({state: {}, env: {}})
+    settings: FluxAsyncDataHelper.init(['state', 'env'])
 });
 
 export default createStore(reducer, state, middleware);

@@ -1,13 +1,15 @@
+import FluxAsyncDataHelper from '../../libs/FluxAsyncDataHelper';
+
 export default function reducer(state, action) {
     if (action.type === 'SETTINGS_LOADING') {
-        state = state.start();
+        state = state.loading();
     } else if (action.type === 'SETTINGS_LOADED') {
-        state = state.done(action.payload);
+        state = state.loaded(action.payload);
     } else if (action.type === 'SETTINGS_LOADING_FAILED') {
-        state = state.reject(action.payload);
+        state = state.failed(action.payload);
     }
 
-    console.log(state.data.state.isGuest);
+    console.log(action.type, state.toJS());
 
     return state;
 }
