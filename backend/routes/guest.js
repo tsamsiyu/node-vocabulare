@@ -3,9 +3,8 @@ var router  = express.Router();
 var User    = require('../models/user').User;
 
 router.post('/signup', function (req, res, next) {
-    if (res.user) {
-        next();
-    }
+    if (res.user) return next();
+
     if (req.body.User) {
         User.signup(req.body.User, function (savingResult) {
             res.end(JSON.stringify(savingResult));

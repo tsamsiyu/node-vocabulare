@@ -6,6 +6,6 @@ export default UserAuthWrapper({
     redirectAction: routerActions.redirect,
     wrapperDisplayName: 'OnlyGuest',
     failureRedirectPath: '/account',
-    predicate: settings => settings.isGuest,
+    predicate: settings => settings.get('data').isGuest,
     allowRedirectBack: false
 });

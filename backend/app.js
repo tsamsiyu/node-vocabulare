@@ -1,16 +1,17 @@
-var express       = require('express');
-var config        = require('config');
-var log           = require('libs/log')(module);
-var http          = require('http');
-var path          = require('path');
-var bodyParser    = require('body-parser');
-var cookieParser  = require('cookie-parser');
-var errorHandler  = require('./middlewares/errorHandler');
-var session       = require('express-session');
-var mongoose      = require('./libs/mongoose');
-var loadUser      = require('./middlewares/loadUser');
-var app           = express();
-var MongoStore    = require('connect-mongo')(session);
+var express         = require('express');
+var config          = require('config');
+var log             = require('libs/log')(module);
+var http            = require('http');
+var path            = require('path');
+var bodyParser      = require('body-parser');
+var cookieParser    = require('cookie-parser');
+var errorHandler    = require('./middlewares/errorHandler');
+var session         = require('express-session');
+var mongoose        = require('./libs/mongoose');
+var loadUser        = require('./middlewares/loadUser');
+var responseHelpers = require('./middlewares/responseHelpers');
+var app             = express();
+var MongoStore      = require('connect-mongo')(session);
 
 http.createServer(app).listen(config.get("port"), function () {
   log.info('Server started');
@@ -37,6 +38,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(loadUser);
+app.use(responseHelpers.json);
 app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES
 app.use('/', require('./routes/guest'));

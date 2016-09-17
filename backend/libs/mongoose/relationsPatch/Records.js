@@ -14,7 +14,7 @@ class BaseRecord {
         var context = this;
         let def = context.relationDefinition;
         if (context.data && !update) {
-            cb(context.data);
+            cb(null, context.data);
         } else {
             let query = {};
             if (def.isRelationCarrier) {
