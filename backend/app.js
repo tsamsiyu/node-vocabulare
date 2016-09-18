@@ -8,7 +8,7 @@ var cookieParser    = require('cookie-parser');
 var errorHandler    = require('./middlewares/errorHandler');
 var session         = require('express-session');
 var mongoose        = require('./libs/mongoose');
-var loadUser        = require('./middlewares/loadUser');
+var sessionPatch    = require('./middlewares/sessionPatch');
 var responseHelpers = require('./middlewares/responseHelpers');
 var app             = express();
 var MongoStore      = require('connect-mongo')(session);
@@ -37,13 +37,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-app.use(loadUser);
+app.use(sessionPatch);
 app.use(responseHelpers.json);
 app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES
-app.use('/', require('./routes/guest'));
-app.use('/', require('./routes/common'));
-
+app.use('/', require('./routes/session'));
 // app.use(function (req, res, next) {
 //   // if (!res.user) {
 //     app.use('/', require('./routes/guest'));

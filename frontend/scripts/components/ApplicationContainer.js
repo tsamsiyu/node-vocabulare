@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 @connect((store) => {
     return {
-        settings: store.get('settings')
+        session: store.get('session')
     };
 })
 export default class ApplicationContainer extends React.Component

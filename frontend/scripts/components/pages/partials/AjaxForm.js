@@ -1,22 +1,24 @@
 import React from 'react';
 import Form from './Form';
 import getFormData from 'get-form-data';
-import { connect } from 'react-redux';
-import axios from 'axios';
+import ApiHelper from '../../../helpers/ApiHelper';
 
 export default class AjaxForm extends React.Component {
     handleFormSubmitting(e) {
         e.preventDefault();
+        let action = e.target.getAttribute('action');
         let formData = getFormData(e.target);
-        $.ajax({ // TODO: use axios, fetch, or other ajax library instead of jquery.ajax
-            method: e.target.method,
-            url: e.target.action,
-            data: formData,
-            crossDomain: true,
-            xhrFields: { withCredentials: true }
-        }).then(function (response) {
-            console.log(response);
-        });
+        let method = e.target.method;
+
+        if (this.props.handle instanceof Function) {
+            this.props.handle(ApiHelper.send({
+                url: action,
+                data: formData,
+                method: method
+            }));
+        } else if (this.props.handleForce instanceof Function) {
+            this.props.handleForce(formData, action, method);
+        }
     }
 
     render() {

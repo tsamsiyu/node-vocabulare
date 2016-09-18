@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { tryKey } from './functions';
+import tryIt from 'lodash/get';
 
 function loading() {
     let map = {...this.toJS(), loading: true, loaded: false, failed: false};
@@ -17,7 +17,7 @@ function failed(errors = {}) {
 }
 
 function patchMap(map) {
-    map.tryData = (chain, missedValue = undefined) => tryKey(map.get('data'), chain, missedValue);
+    map.tryData = (chain, missedValue = undefined) => tryIt(map.get('data'), chain, missedValue);
     map.loading = loading;
     map.loaded = loaded;
     map.failed = failed;
@@ -43,9 +43,9 @@ export default class FluxAsyncDataHelper {
             data = tmp;
         }
         if (fillEmpty) {
-            return patchMap(Immutable.Map({...this.defaultData, data: data}));
+            return patchMap(Immutable.fromJS({...this.defaultData, data: data}));
         } else {
-            return patchMap(Immutable.Map(data));
+            return patchMap(Immutable.fromJS(data));
         }
     }
 

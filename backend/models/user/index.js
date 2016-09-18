@@ -56,14 +56,13 @@ User.signup = function(attributes, cb) {
         profile.fill(attributes, ['firstName', 'lastName', 'birthday']);
 
         user.save(function(uErr, uModel, uAffected) {
-            if (uErr) throw uErr;
-            profile.set('userId', user.get('_id')).save(function (pErr, pModel, pAffected) {
-                if (pErr) throw pErr;
-                cb({ status: 1 });
+            if (uErr) return cb(uErr);
+            profile.set('userId', user.get('_id')).save((pErr, profile) => {
+                cb(pErr, user);
             });
         });
     }, function(errors) {
-        cb({ status: 0, errors: errors });
+        cb(null, null, errors);
     });
 };
 
@@ -76,15 +75,16 @@ User.signin = function(attributes, cb) {
             query.login = attributes.loginOrEmail;
         }
 
-        User.findOne(query, function (err, doc) {
-            if (doc && doc.encryptPassword(attributes.password) === doc.hashedPassword) {
-                cb(doc);
+        User.findOne(query, function (err, user) {
+            if (err) return cb(err);
+            if (user && user.encryptPassword(attributes.password) === user.hashedPassword) {
+                cb(null, user);
             } else {
-                cb();
+                cb(null, null, {password: "Such user doesn't exist"});
             }
         });
     }, function(errors) {
-        cb();
+        cb(null, null, errors);
     });
 };
 

@@ -1,11 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-@connect((store) => {
-    return {
-        settings: store.get('settings')
-    };
-})
 export default class Form extends React.Component {
     static childContextTypes = {
         formId: React.PropTypes.string
@@ -18,12 +13,11 @@ export default class Form extends React.Component {
     }
 
     render() {
-        let action = this.props.settings.tryData('data.env.apiUrl', '') + this.props.action;
         let className = this.props.className || 'form-horizontal';
         let method = this.props.method || 'POST';
 
         return (
-                <form action={action}
+                <form action={this.props.action}
                       className={className}
                       method={method}
                       noValidate

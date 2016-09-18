@@ -9,11 +9,11 @@ import config from '../config.json'
 
 const middleware = applyMiddleware(promise(), thunk/*, logger()*/);
 const reducer = combineReducers({
-    settings: FluxAsyncDataHelper.createReducer('SETTINGS'),
+    session: FluxAsyncDataHelper.createReducer('SESSION'),
     config: (state, action) => state
 });
 const state = Immutable.Map({
-    settings: FluxAsyncDataHelper.init({isGuest: true}),
+    session: FluxAsyncDataHelper.init({isGuest: true}),
     config: config
 });
 

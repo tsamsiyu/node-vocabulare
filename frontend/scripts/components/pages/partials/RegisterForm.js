@@ -1,18 +1,11 @@
 import React from "react";
 import FormInput from './FormInput';
 import AjaxForm from './AjaxForm';
-import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { browserHistory } from 'react-router';
 
-
-@connect((store) => {
-    return {
-        settings: store.get('settings')
-    };
-})
 export default class RegisterForm extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -26,10 +19,22 @@ export default class RegisterForm extends React.Component {
         });
     }
 
+    handleSignup(request) {
+        request.then((response) => {
+            if (response.status) {
+                browserHistory.push('/signin');
+            } else {
+                console.error(response.errors);
+            }
+        }).catch((error) => {
+            console.error(error);
+        })
+    }
+
     render() {
         return (
             <div id="register_form-component">
-                <AjaxForm action="/signup" id="register_form">
+                <AjaxForm action="/signup" id="register_form" handle={this.handleSignup.bind(this)}>
                     <FormInput name="User[firstName]" label="First name"/>
                     <FormInput name="User[lastName]" label="Last name"/>
                     <FormInput name="User[email]" label="Email" type="email"/>
