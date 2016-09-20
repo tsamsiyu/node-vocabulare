@@ -47,8 +47,8 @@ module.exports = {
         loader: 'file?name=[1].[ext]&regExp=node_modules/(.*)'
       },
       {
-        test: /\.css(\?v=\d+\.\d+\.\d+)?$/,
-        loader: ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 versions'),
+        test: /\.(css|scss)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer?browsers=last 2 versions'),
       },
     ]
   },
@@ -62,8 +62,15 @@ module.exports = {
       jQuery: "jquery",
       React: 'react'
     }),
+    new webpack.optimize.DedupePlugin(),
     new ExtractTextPlugin('[name].bundle.css'),
     new webpack.NoErrorsPlugin(),
+    // new BowerWebpackPlugin({
+    //   modulesDirectories: ['bower_components'],
+    //   manifestFiles: ['bower.json', '.bower.json'],
+    //   includes: /.*/,
+    //   excludes: /.*\.less$/
+    // }),
   ]
 };
 
