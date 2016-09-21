@@ -1,4 +1,3 @@
-import React from 'react';
 import Form from './Form';
 import getFormData from 'get-form-data';
 import ApiHelper from '../../../helpers/ApiHelper';

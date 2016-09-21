@@ -12,7 +12,7 @@ const reducer = combineReducers({
     session: FluxAsyncDataHelper.createReducer('SESSION'),
     config: (state, action) => state
 });
-const state = Immutable.Map({
+const state = Immutable.fromJS({
     session: FluxAsyncDataHelper.init({isGuest: true}),
     config: config
 });

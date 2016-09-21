@@ -1,11 +1,10 @@
-import React from 'react';
-import store from '../../store';
-import { signout } from '../../store/actions/session';
+import store from '../../../store';
+import { signout } from '../../../store/actions/session';
 import { connect } from 'react-redux';
 
 @connect((store) => {
     return {
-        session: store.get('session')
+        config: store.get('config')
     };
 })
 export default class Nav extends React.Component {
@@ -20,7 +19,7 @@ export default class Nav extends React.Component {
                 <nav className="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div className="container">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="#">{this.props.session.appName}</a>
+                            <a className="navbar-brand" href="#">{this.props.config.appName}</a>
                         </div>
                         <div className="navbar-collapse collapse" id="navbar">
                             <ul className="nav navbar-nav navbar-right">

@@ -4,8 +4,7 @@ import { routerActions } from 'react-router-redux';
 export default UserAuthWrapper({
     authSelector: state => state.get('session'),
     redirectAction: routerActions.redirect,
-    wrapperDisplayName: 'OnlyLoggedUser',
+    wrapperDisplayName: 'AppStart',
     failureRedirectPath: '/signin',
-    predicate: session => !session.get('data').get('isGuest'),
-    allowRedirectBack: false
+    predicate: session => session.get('loading')
 });

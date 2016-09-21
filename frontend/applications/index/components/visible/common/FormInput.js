@@ -1,5 +1,3 @@
-import React from "react";
-
 export default class FormInput extends React.Component {
     static contextTypes = {
         formId: React.PropTypes.string

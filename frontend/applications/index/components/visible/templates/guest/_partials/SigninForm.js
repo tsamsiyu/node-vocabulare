@@ -1,10 +1,9 @@
-import React from "react";
-import FormInput from './FormInput';
-import AjaxForm from './AjaxForm';
-import store from '../../../store';
-import { signin } from '../../../store/actions/session';
+import FormInput from '../../../common/FormInput';
+import AjaxForm from '../../../common/AjaxForm';
+import store from '../../../../../store';
+import { signin } from '../../../../../store/actions/session';
 
-export default class LoginForm extends React.Component {
+export default class SigninForm extends React.Component {
     loginAction(data) {
         store.dispatch(signin(data));
     }

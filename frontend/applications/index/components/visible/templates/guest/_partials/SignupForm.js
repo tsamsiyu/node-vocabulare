@@ -1,11 +1,10 @@
-import React from "react";
-import FormInput from './FormInput';
-import AjaxForm from './AjaxForm';
+import FormInput from '../../../common/FormInput';
+import AjaxForm from '../../../common/AjaxForm';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { browserHistory } from 'react-router';
 
-export default class RegisterForm extends React.Component {
+export default class SignupForm extends React.Component {
     constructor() {
         super();
         this.state = {
