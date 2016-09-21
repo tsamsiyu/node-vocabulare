@@ -19,7 +19,7 @@ export default class Nav extends React.Component {
                 <nav className="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div className="container">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="#">{this.props.config.appName}</a>
+                            <a className="navbar-brand" href="#">{this.props.config.get('appName')}</a>
                         </div>
                         <div className="navbar-collapse collapse" id="navbar">
                             <ul className="nav navbar-nav navbar-right">
