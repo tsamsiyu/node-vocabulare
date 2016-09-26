@@ -43,9 +43,13 @@ schema.virtual('password')
         return this._plainPassword;
     });
 
-var User = mongoose.model('User', schema);
+schema.virtual('profile', {
+    ref: 'Profile',
+    localField: '_id',
+    foreignField: 'userId'
+});
 
-User.hasOne('Profile');
+var User = mongoose.model('User', schema);
 
 User.signup = function(attributes, cb) {
     userValidators.signup(attributes).then(function(validatedUser) {

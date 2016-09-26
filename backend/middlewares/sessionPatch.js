@@ -1,4 +1,5 @@
 var User = require('../models/user').User;
+var Profile = require('../models/user').Profile;
 var lookup = require('lodash/get');
 
 module.exports = function (req, res, next) {
@@ -12,24 +13,21 @@ module.exports = function (req, res, next) {
         return this;
     };
 
-    req.getAppUser = function(cb) {
+    req.getAppUser = function() {
         if (this.user instanceof User) {
-            this.user.profile.get((err, profile) => {
-                if (err) return cb(err);
-                cb(null, {
-                    isGuest: false,
-                    firstName: profile.firstName,
-                    lastName: profile.lastName
-                });
-            });
+            return {
+                isGuest: false,
+                firstName: this.user.profile.firstName,
+                lastName: this.user.profile.lastName
+            };
         } else {
-            cb(null, {isGuest: true});
+            return {isGuest: true};
         }
     };
 
-    var userId = lookup(req, 'session.user.id');
-    if (userId) {
-        User.findById(userId, (err, user) => {
+    const userId = lookup(req, 'session.user.id');
+    if (userId !== undefined) {
+        User.findById(userId).populate('profile').exec((err, user) => {
             if (err) return next(err);
             req.setUser(user);
             next();

@@ -9,7 +9,7 @@ var errorHandler    = require('./middlewares/errorHandler');
 var session         = require('express-session');
 var mongoose        = require('./libs/mongoose');
 var sessionPatch    = require('./middlewares/sessionPatch');
-var responseHelpers = require('./middlewares/responseHelpers');
+var responsePatch = require('./middlewares/responsePatch');
 var app             = express();
 var MongoStore      = require('connect-mongo')(session);
 
@@ -38,7 +38,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(sessionPatch);
-app.use(responseHelpers.json);
+app.use(responsePatch.json);
 app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES
 app.use('/', require('./routes/session'));

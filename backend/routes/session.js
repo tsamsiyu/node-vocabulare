@@ -29,10 +29,9 @@ router.post('/signin', function (req, res, next) {
             if (errors) {
                 res.json({status: 0, errors: errors});
             } else {
-                req.setUser(user).getAppUser((err, data) => {
-                    if (err) return next(err);
-                    res.json({status: 1, data: data});
-                });
+                req.setUser(user);
+                const appUser = getAppUser();
+                res.json({status: 1, data: appUser});
             }
         });
     } else {
@@ -50,10 +49,8 @@ router.post('/signout', function (req, res, next) {
 });
 
 router.get('/session', function (req, res, next) {
-    req.getAppUser((err, data) => {
-        if (err) return next(err);
-        res.json(data);
-    });
+    const appUser = req.getAppUser();
+    res.json(appUser);
 });
 
 module.exports = router;

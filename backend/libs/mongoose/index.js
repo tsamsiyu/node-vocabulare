@@ -11,7 +11,7 @@ mongoose.model = function(name, schema, collection, skipInit) {
     var m = prevModelFunction.call(mongoose, name, schema, collection, skipInit);
 
     modelBasePatch.call(this, m);
-    modelRelationsPatch.call(this, m);
+    // modelRelationsPatch.call(this, m);
 
     return m;
 };
