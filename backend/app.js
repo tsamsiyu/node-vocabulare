@@ -22,10 +22,11 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, *");
+  res.setHeader("Access-Control-Allow-Headers", "Authorization");
   // res.setHeader('Content-Type', 'application/json');
   next();
 });
@@ -41,6 +42,9 @@ app.use(sessionPatch);
 app.use(responsePatch.json);
 app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES
+app.get('/echo', (req, res) => {
+  res.end('echo');
+});
 app.use('/', require('./routes/session'));
 // app.use(function (req, res, next) {
 //   // if (!res.user) {
