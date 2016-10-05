@@ -1,16 +1,19 @@
-import { NgModule }         from '@angular/core';
-import { BrowserModule }    from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
-import { LoginComponent }   from './login/login.component';
 import { routing } from './app.routing';
-import { HttpService } from './core/http.service';
+import { BrowserModule }    from '@angular/platform-browser';
 import {HttpModule, RequestOptions}    from '@angular/http';
+import { NgModule } from '@angular/core';
+import { CoreModule } from './core/core.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from "./core/auth.service";
+import {AppRequestOptions} from "./core/app-request-options";
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
-        routing
+        routing,
+        CoreModule
     ],
     declarations: [
         AppComponent, LoginComponent
@@ -19,7 +22,6 @@ import {HttpModule, RequestOptions}    from '@angular/http';
         AppComponent
     ],
     providers: [
-        {provide: RequestOptions, useClass: HttpService}
     ]
 })
 export class AppModule { }

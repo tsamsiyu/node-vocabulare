@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {AppInitializer} from "./core/app-initializer";
 
 @Component({
     selector: 'my-app',
-    template: '<router-outlet></router-outlet>'
+    template: `
+<div [style.display]="isInitialized ? 'block' : 'none'">
+    <router-outlet ></router-outlet>
+</div>
+`
 })
 export class AppComponent {
-    constructor(http: Http) {
-        console.log('log');
-        const h = new Headers;
-        h.append('Authorization', 'Bearer peiowjdliaj59084');
+    public isInitialized = false;
 
-        http.get('http://localhost:3003/echo', {
-            headers: h
-        }).subscribe(
-            data => { console.log(data) },
-            err => {}
-        )
+    constructor(appInitializer: AppInitializer) {
+        appInitializer.bootstrap.subscribe((err) => {
+            if (!err) {
+                console.info('application was initialized');
+                this.isInitialized = true;
+            } else {
+
+            }
+        });
     }
 }
