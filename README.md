@@ -1,2 +1,2 @@
 # node-vocabulare
-learn react, redux, nodejs, mongodb
+learn angular2, nodejs, mongodb, react, redux
